@@ -1,11 +1,11 @@
 [package]
 name = "ayu"
-version = "0.1.3"
+version = "0.1.4"
 authors = ["weizhang9 <wei.zhang@sky.uk>"]
 edition = "2018"
 license = "MIT"
 description = "A tool to generate random password"
-readme = "README.md"
+readme="README.md"
 homepage = "https://github.com/weizhang9/ayu"
 repository = "https://github.com/weizhang9/ayu"
 keywords = ["cli", "random-password", "security", "utility"]

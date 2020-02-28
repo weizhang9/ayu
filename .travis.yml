@@ -1,33 +1,35 @@
 language: rust
 rust:
-- stable
-- beta
-- nightly
+  - stable
+  - beta
+  - nightly
 script: cargo build --verbose --release; cargo test --verbose
 matrix:
   allow_failures:
-  - rust: nightly
+    - rust: nightly
   fast_finish: true
 os:
-- linux
-- osx
+  - linux
+  - osx
 before_deploy:
   - "if [[ -f target/release/ayu ]]; then mv target/release/ayu \"target/release/ayu-$TRAVIS_TAG-$TRAVIS_OS_NAME\"; fi"
 deploy:
-- provider: cargo
-  on:
-    tags: true
-    condition: "$TRAVIS_RUST_VERSION = stable && $TRAVIS_OS_NAME = linux"
-    branch: master
-  token:
-    secure: "BsowJ/Bjh1G1qmdAAKt1lMkz12smpvWa05MvBDWIjE/YZDkgWZgucK/SLXitvej4CSn5MhriPYO9IoRn+c4Mhz9Aq0Bk1mJsiVsiN4a1ABC/04/xAurh8F8sxKvvhcull9bMlbG13nKxpYYehruiY2/NCvQHOLLypOjxc0zR/+yfGLvuVWqibtPD3t7x7cxThp24nkP8SG1BqvhJPEenHsdyxKyYe7I5IfsSX4/Cdlb8d+5/e25jj94bCjIrn6wvPt/pdiA9KLexKQBZpr8/w7SV7L0GBsFHg+Msw5ic/T/AqcLwNSggAcez3eiNEGhlDuT9jsQYU7Kli/C9vQ/H29OT+pdBor47Ni+QASWTNWuoaELtDOwx5ppFRoO0DmZgYoy2OUcltiomP9/rXBjry+rbUd9q+AVCGxwW98GNZu7TzZjcTvG0hIcjkQIQCeCbfXXG1robU54FrTgFaSbz3A16q7mPKsC8b827ZYdql6gRcGrJhOotu8ZZUdH3P6WZDR10wyRQ2Z5jXD0WtY6Yy3vx46ZSLnqV9AQAMWBqY/CkGiExYHHFtMQseW2ZbyikUBdIDRJ7rBcmw9nr1keufcwSODzy+/rMt8g5ZDj/YkrxaJMwjhIKRoZiqlLnp4+hln3a7av3Gtv+Mj/GfTULHRnWuKrw3umsDDHanKFkw3A="
-- provider: releases
-  on:
-    tags: true
-    condition: "$TRAVIS_RUST_VERSION = stable"
-    branch: master
-  file_glob: true
-  file:
-  - target/release/ayu-*
-  api_key:
-    secure: "X1NLm/G2aLZ5YZY9MgHlAChGcc3I+ZAljombUoEvtrbfULLCXB7+OCJ2uutaUhQjlflvc4GakhsTvVLogqQHy4cg3YAzBffu27FOrtuG47KtCW6eZWhXDAjivgraD4p9jcV48J53w7bpgjr55GKQ+StTlAILUtuH6x/Y0Xf259POOpHf/+dWFJLqgSnu8syBhL1ckKDvojw6wOI1AjBiwlE6bxbZg5iUp4rOA0Var/QL2S3xt4XWvEM5q0ZmxvhYPIOfx2/eD6CUkW7QTRQyOBc82+I76GX/bu7DMS1MU4EM+zYzdFT7bmAqe9hG9JzScblPemz7fBvN2UnHfSCcivcJ+ejZuaUXjCo2GPQNAOcUe6giKzCzGtjnPgtg6bW5It3w3/RxcI7W2CiXQbjajlZvCAhFQ28X32BtlvSdKADD5Y0zmrK4kNUIJ+RjETvN4Whx5j3izJsETZmTNLK25PSrqLk2lCgxru4AqzPD0muBg1B4LjmRbLFGLQMsG1uFShRLGCp0VxmzEDtgFaBII92jFt/6EY9OeTEufLTClntvHIFPALUKCS3UZB+si5zOGeQVJZzNZebaQZ1CvzXq8g7dz5WSF1uoYmPlwxw6nfKwVkA6saYo92gV94BTVQ+JSMO2pgsMMc2C7UEOCQH83rx5N/nQwhDOseTW1ofxClc="
+  - provider: cargo
+    skip_cleanup: true
+    on:
+      tags: true
+      condition: "$TRAVIS_RUST_VERSION = stable && $TRAVIS_OS_NAME = linux"
+      branch: master
+    token:
+      secure: "BsowJ/Bjh1G1qmdAAKt1lMkz12smpvWa05MvBDWIjE/YZDkgWZgucK/SLXitvej4CSn5MhriPYO9IoRn+c4Mhz9Aq0Bk1mJsiVsiN4a1ABC/04/xAurh8F8sxKvvhcull9bMlbG13nKxpYYehruiY2/NCvQHOLLypOjxc0zR/+yfGLvuVWqibtPD3t7x7cxThp24nkP8SG1BqvhJPEenHsdyxKyYe7I5IfsSX4/Cdlb8d+5/e25jj94bCjIrn6wvPt/pdiA9KLexKQBZpr8/w7SV7L0GBsFHg+Msw5ic/T/AqcLwNSggAcez3eiNEGhlDuT9jsQYU7Kli/C9vQ/H29OT+pdBor47Ni+QASWTNWuoaELtDOwx5ppFRoO0DmZgYoy2OUcltiomP9/rXBjry+rbUd9q+AVCGxwW98GNZu7TzZjcTvG0hIcjkQIQCeCbfXXG1robU54FrTgFaSbz3A16q7mPKsC8b827ZYdql6gRcGrJhOotu8ZZUdH3P6WZDR10wyRQ2Z5jXD0WtY6Yy3vx46ZSLnqV9AQAMWBqY/CkGiExYHHFtMQseW2ZbyikUBdIDRJ7rBcmw9nr1keufcwSODzy+/rMt8g5ZDj/YkrxaJMwjhIKRoZiqlLnp4+hln3a7av3Gtv+Mj/GfTULHRnWuKrw3umsDDHanKFkw3A="
+  - provider: releases
+    skip_cleanup: true
+    on:
+      tags: true
+      condition: "$TRAVIS_RUST_VERSION = stable"
+      branch: master
+    file_glob: true
+    file:
+      - target/release/ayu-*
+    api_key:
+      secure: "X1NLm/G2aLZ5YZY9MgHlAChGcc3I+ZAljombUoEvtrbfULLCXB7+OCJ2uutaUhQjlflvc4GakhsTvVLogqQHy4cg3YAzBffu27FOrtuG47KtCW6eZWhXDAjivgraD4p9jcV48J53w7bpgjr55GKQ+StTlAILUtuH6x/Y0Xf259POOpHf/+dWFJLqgSnu8syBhL1ckKDvojw6wOI1AjBiwlE6bxbZg5iUp4rOA0Var/QL2S3xt4XWvEM5q0ZmxvhYPIOfx2/eD6CUkW7QTRQyOBc82+I76GX/bu7DMS1MU4EM+zYzdFT7bmAqe9hG9JzScblPemz7fBvN2UnHfSCcivcJ+ejZuaUXjCo2GPQNAOcUe6giKzCzGtjnPgtg6bW5It3w3/RxcI7W2CiXQbjajlZvCAhFQ28X32BtlvSdKADD5Y0zmrK4kNUIJ+RjETvN4Whx5j3izJsETZmTNLK25PSrqLk2lCgxru4AqzPD0muBg1B4LjmRbLFGLQMsG1uFShRLGCp0VxmzEDtgFaBII92jFt/6EY9OeTEufLTClntvHIFPALUKCS3UZB+si5zOGeQVJZzNZebaQZ1CvzXq8g7dz5WSF1uoYmPlwxw6nfKwVkA6saYo92gV94BTVQ+JSMO2pgsMMc2C7UEOCQH83rx5N/nQwhDOseTW1ofxClc="
