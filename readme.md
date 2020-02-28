@@ -1,4 +1,4 @@
-This is a command line tool version of random password generator.
+This is a command line tool to generate random password.
 
 ## How to install
 ### *via [crates.io](https://crates.io/crates/ayu)*
@@ -21,4 +21,3 @@ ayu -L=20 -C=1
 > This command generates you a random password of a length of 20 and it contains alphameric + special charset, which is the default charset. 
 
 > `-L` flag is required, `-C` is optional. There are 4 options to choose from. 
-
