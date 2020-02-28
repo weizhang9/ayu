@@ -1,7 +1,7 @@
 This is a command line tool version of random password generator.
 
 ## How to use
-1. go to {{releases}} section of the repo and download the desired binary
+1. go to [releases](https://github.com/weizhang9/ayu/releases) section of the repo and download the desired binary
 5. put the binary at your desired location and add the `path/to/ayu` to your $PATH in .bashrc
 6. run `ayu --help` in your command line to see options of the tool
 
