@@ -1,11 +1,8 @@
-This is a command line tool version of random password generator. I used this project to learn Rust so there are a lot improvements can be done, until then I will keep it in this repo instead of publishing for public usage. Please feel free to clone it to build a binary locally to run in your command line if you think this would be useful.
+This is a command line tool version of random password generator.
 
 ## How to use
-1. clone this repo
-2. in the root of this repo, run `cargo build --release`
-3. now you will see a `target` directory generated
-4. under `./target/release` you can see the binary `ayu` which is this tool
-5. put the binary at your desired location and add the `path/to/ayu` to your $PATH in .bahrc (sorry it only supports MacOS at the moment)
+1. go to {{releases}} section of the repo and download the desired binary
+5. put the binary at your desired location and add the `path/to/ayu` to your $PATH in .bashrc
 6. run `ayu --help` in your command line to see options of the tool
 
 ### Basic usage
