@@ -3,9 +3,7 @@ rust:
   - stable
   - beta
   - nightly
-script: cargo build --verbose --release; cargo test --verbose
-GH_TOKEN: &GH_TOKEN
-  secure: "eeKR7NC+t7wJhC484tgQQ/FjvV3LioUv2/39IoX4V3E+f9VK/HoB+RgpXui3oMbpmcNnObVbADutOZrzy2Ih27FOXOgmhb2eHFu+AMJunJvpqpRRPGue1NG+Qyu4GVwhOrXJOOzn1vKbhFO27v/vCalGoZywPG9B32FQaXddDn18yeGWm5nRHHRBWq4gUdtuLWeeA+L4pqxw7Aa7VvmedlASEGEUkerAYYftXAydiB5iks6PvQOCcHhx1KfJ9tn86cjHd7+t854KldDKMzEXURrxjHDdT/yv6dq5FbmKFaOblWNwuHTQcL9C6Xxdv7NSaHdJQEFwUlWi8klpuqkqFSMi21sJ8R3LZcZwg8OfmM0o0z3OIN1Sq8E2ipPNmFjAyvpYq1PmcNPeIGsKCDfgb9FSYFdLfUmJzGFCNn2BQ6bcACdjXnZGQdsjTLu/5O76m8WxAtSck3z0tRAOryllkkNdPSo8Er3pRjaoIRO/DPTn0VkVi66LwGA8TrwQ2zLfqgdlT0uttzcdrHn5uJ0Qo7satVEKOcGpVZRQGlLGQipYG1q0xnzEDvdE7lt0VWmJBYkWehJ0do+rEFjdleWUndXp0tu8SLYquIT20ug3gDiGmZlCr2gkTs93MJ0u0+FKKBexD1x+buogpzyXllGsda0DV2wvLLsJEI7QadENx+M="
+script: cargo build --verbose --release; cargo test --verbose  
 matrix:
   allow_failures:
     - rust: nightly
@@ -17,14 +15,13 @@ before_deploy:
   - "if [[ -f target/release/ayu ]]; then mv target/release/ayu \"target/release/ayu-$TRAVIS_TAG-$TRAVIS_OS_NAME\"; fi"
 deploy:
   - provider: cargo
-    skip_cleanup: true
     on:
       tags: true
       condition: "$TRAVIS_RUST_VERSION = stable && $TRAVIS_OS_NAME = linux"
       branch: master
-    token: *GH_TOKEN
+    token:
+      secure: "eeKR7NC+t7wJhC484tgQQ/FjvV3LioUv2/39IoX4V3E+f9VK/HoB+RgpXui3oMbpmcNnObVbADutOZrzy2Ih27FOXOgmhb2eHFu+AMJunJvpqpRRPGue1NG+Qyu4GVwhOrXJOOzn1vKbhFO27v/vCalGoZywPG9B32FQaXddDn18yeGWm5nRHHRBWq4gUdtuLWeeA+L4pqxw7Aa7VvmedlASEGEUkerAYYftXAydiB5iks6PvQOCcHhx1KfJ9tn86cjHd7+t854KldDKMzEXURrxjHDdT/yv6dq5FbmKFaOblWNwuHTQcL9C6Xxdv7NSaHdJQEFwUlWi8klpuqkqFSMi21sJ8R3LZcZwg8OfmM0o0z3OIN1Sq8E2ipPNmFjAyvpYq1PmcNPeIGsKCDfgb9FSYFdLfUmJzGFCNn2BQ6bcACdjXnZGQdsjTLu/5O76m8WxAtSck3z0tRAOryllkkNdPSo8Er3pRjaoIRO/DPTn0VkVi66LwGA8TrwQ2zLfqgdlT0uttzcdrHn5uJ0Qo7satVEKOcGpVZRQGlLGQipYG1q0xnzEDvdE7lt0VWmJBYkWehJ0do+rEFjdleWUndXp0tu8SLYquIT20ug3gDiGmZlCr2gkTs93MJ0u0+FKKBexD1x+buogpzyXllGsda0DV2wvLLsJEI7QadENx+M="
   - provider: releases
-    skip_cleanup: true
     on:
       tags: true
       condition: "$TRAVIS_RUST_VERSION = stable"
@@ -32,4 +29,5 @@ deploy:
     file_glob: true
     file:
       - target/release/ayu-*
-    api_key: *GH_TOKEN
+    api_key: 
+      secure: "eeKR7NC+t7wJhC484tgQQ/FjvV3LioUv2/39IoX4V3E+f9VK/HoB+RgpXui3oMbpmcNnObVbADutOZrzy2Ih27FOXOgmhb2eHFu+AMJunJvpqpRRPGue1NG+Qyu4GVwhOrXJOOzn1vKbhFO27v/vCalGoZywPG9B32FQaXddDn18yeGWm5nRHHRBWq4gUdtuLWeeA+L4pqxw7Aa7VvmedlASEGEUkerAYYftXAydiB5iks6PvQOCcHhx1KfJ9tn86cjHd7+t854KldDKMzEXURrxjHDdT/yv6dq5FbmKFaOblWNwuHTQcL9C6Xxdv7NSaHdJQEFwUlWi8klpuqkqFSMi21sJ8R3LZcZwg8OfmM0o0z3OIN1Sq8E2ipPNmFjAyvpYq1PmcNPeIGsKCDfgb9FSYFdLfUmJzGFCNn2BQ6bcACdjXnZGQdsjTLu/5O76m8WxAtSck3z0tRAOryllkkNdPSo8Er3pRjaoIRO/DPTn0VkVi66LwGA8TrwQ2zLfqgdlT0uttzcdrHn5uJ0Qo7satVEKOcGpVZRQGlLGQipYG1q0xnzEDvdE7lt0VWmJBYkWehJ0do+rEFjdleWUndXp0tu8SLYquIT20ug3gDiGmZlCr2gkTs93MJ0u0+FKKBexD1x+buogpzyXllGsda0DV2wvLLsJEI7QadENx+M="
