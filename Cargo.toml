@@ -1,6 +1,6 @@
 [package]
 name = "ayu"
-version = "0.2.0"
+version = "0.2.2"
 authors = ["weizhang9 <wei.zhang@sky.uk>"]
 edition = "2018"
 license = "MIT"
