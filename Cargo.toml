@@ -5,11 +5,12 @@ authors = ["weizhang9 <wei.zhang@sky.uk>"]
 edition = "2018"
 license = "MIT"
 description = "A tool to generate random password"
-readme = "readme.md"
+readme = "README.md"
 homepage = "https://github.com/weizhang9/ayu"
 repository = "https://github.com/weizhang9/ayu"
 keywords = ["cli", "random-password", "security", "utility"]
 categories = ["command-line-utilities"]
+travis-ci = { repository = "weizhang9/ayu", branch = "master" }
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

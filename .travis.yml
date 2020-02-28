@@ -1,33 +1,36 @@
 language: rust
 rust:
-  - stable
-  - beta
-  - nightly
-script: cargo build --verbose --release; cargo test --verbose  
+- stable
+- beta
+- nightly
+script: cargo build --verbose --release; cargo test --verbose
 matrix:
   allow_failures:
-    - rust: nightly
+  - rust: nightly
   fast_finish: true
 os:
-  - linux
-  - osx
+- linux
+- osx
 before_deploy:
   - "if [[ -f target/release/ayu ]]; then mv target/release/ayu \"target/release/ayu-$TRAVIS_TAG-$TRAVIS_OS_NAME\"; fi"
 deploy:
-  - provider: cargo
-    on:
-      tags: true
-      condition: "$TRAVIS_RUST_VERSION = stable && $TRAVIS_OS_NAME = linux"
-      branch: master
-    token:
-      secure: "eeKR7NC+t7wJhC484tgQQ/FjvV3LioUv2/39IoX4V3E+f9VK/HoB+RgpXui3oMbpmcNnObVbADutOZrzy2Ih27FOXOgmhb2eHFu+AMJunJvpqpRRPGue1NG+Qyu4GVwhOrXJOOzn1vKbhFO27v/vCalGoZywPG9B32FQaXddDn18yeGWm5nRHHRBWq4gUdtuLWeeA+L4pqxw7Aa7VvmedlASEGEUkerAYYftXAydiB5iks6PvQOCcHhx1KfJ9tn86cjHd7+t854KldDKMzEXURrxjHDdT/yv6dq5FbmKFaOblWNwuHTQcL9C6Xxdv7NSaHdJQEFwUlWi8klpuqkqFSMi21sJ8R3LZcZwg8OfmM0o0z3OIN1Sq8E2ipPNmFjAyvpYq1PmcNPeIGsKCDfgb9FSYFdLfUmJzGFCNn2BQ6bcACdjXnZGQdsjTLu/5O76m8WxAtSck3z0tRAOryllkkNdPSo8Er3pRjaoIRO/DPTn0VkVi66LwGA8TrwQ2zLfqgdlT0uttzcdrHn5uJ0Qo7satVEKOcGpVZRQGlLGQipYG1q0xnzEDvdE7lt0VWmJBYkWehJ0do+rEFjdleWUndXp0tu8SLYquIT20ug3gDiGmZlCr2gkTs93MJ0u0+FKKBexD1x+buogpzyXllGsda0DV2wvLLsJEI7QadENx+M="
-  - provider: releases
-    on:
-      tags: true
-      condition: "$TRAVIS_RUST_VERSION = stable"
-      branch: master
-    file_glob: true
-    file:
-      - target/release/ayu-*
-    api_key: 
-      secure: "eeKR7NC+t7wJhC484tgQQ/FjvV3LioUv2/39IoX4V3E+f9VK/HoB+RgpXui3oMbpmcNnObVbADutOZrzy2Ih27FOXOgmhb2eHFu+AMJunJvpqpRRPGue1NG+Qyu4GVwhOrXJOOzn1vKbhFO27v/vCalGoZywPG9B32FQaXddDn18yeGWm5nRHHRBWq4gUdtuLWeeA+L4pqxw7Aa7VvmedlASEGEUkerAYYftXAydiB5iks6PvQOCcHhx1KfJ9tn86cjHd7+t854KldDKMzEXURrxjHDdT/yv6dq5FbmKFaOblWNwuHTQcL9C6Xxdv7NSaHdJQEFwUlWi8klpuqkqFSMi21sJ8R3LZcZwg8OfmM0o0z3OIN1Sq8E2ipPNmFjAyvpYq1PmcNPeIGsKCDfgb9FSYFdLfUmJzGFCNn2BQ6bcACdjXnZGQdsjTLu/5O76m8WxAtSck3z0tRAOryllkkNdPSo8Er3pRjaoIRO/DPTn0VkVi66LwGA8TrwQ2zLfqgdlT0uttzcdrHn5uJ0Qo7satVEKOcGpVZRQGlLGQipYG1q0xnzEDvdE7lt0VWmJBYkWehJ0do+rEFjdleWUndXp0tu8SLYquIT20ug3gDiGmZlCr2gkTs93MJ0u0+FKKBexD1x+buogpzyXllGsda0DV2wvLLsJEI7QadENx+M="
+- provider: cargo
+  on:
+    tags: true
+    condition: "$TRAVIS_RUST_VERSION = stable && $TRAVIS_OS_NAME = linux"
+    branch: master
+  token:
+    secure: eeKR7NC+t7wJhC484tgQQ/FjvV3LioUv2/39IoX4V3E+f9VK/HoB+RgpXui3oMbpmcNnObVbADutOZrzy2Ih27FOXOgmhb2eHFu+AMJunJvpqpRRPGue1NG+Qyu4GVwhOrXJOOzn1vKbhFO27v/vCalGoZywPG9B32FQaXddDn18yeGWm5nRHHRBWq4gUdtuLWeeA+L4pqxw7Aa7VvmedlASEGEUkerAYYftXAydiB5iks6PvQOCcHhx1KfJ9tn86cjHd7+t854KldDKMzEXURrxjHDdT/yv6dq5FbmKFaOblWNwuHTQcL9C6Xxdv7NSaHdJQEFwUlWi8klpuqkqFSMi21sJ8R3LZcZwg8OfmM0o0z3OIN1Sq8E2ipPNmFjAyvpYq1PmcNPeIGsKCDfgb9FSYFdLfUmJzGFCNn2BQ6bcACdjXnZGQdsjTLu/5O76m8WxAtSck3z0tRAOryllkkNdPSo8Er3pRjaoIRO/DPTn0VkVi66LwGA8TrwQ2zLfqgdlT0uttzcdrHn5uJ0Qo7satVEKOcGpVZRQGlLGQipYG1q0xnzEDvdE7lt0VWmJBYkWehJ0do+rEFjdleWUndXp0tu8SLYquIT20ug3gDiGmZlCr2gkTs93MJ0u0+FKKBexD1x+buogpzyXllGsda0DV2wvLLsJEI7QadENx+M=
+- provider: releases
+  on:
+    tags: true
+    condition: "$TRAVIS_RUST_VERSION = stable"
+    branch: master
+  file_glob: true
+  file:
+  - target/release/ayu-*
+  api_key:
+    secure: eeKR7NC+t7wJhC484tgQQ/FjvV3LioUv2/39IoX4V3E+f9VK/HoB+RgpXui3oMbpmcNnObVbADutOZrzy2Ih27FOXOgmhb2eHFu+AMJunJvpqpRRPGue1NG+Qyu4GVwhOrXJOOzn1vKbhFO27v/vCalGoZywPG9B32FQaXddDn18yeGWm5nRHHRBWq4gUdtuLWeeA+L4pqxw7Aa7VvmedlASEGEUkerAYYftXAydiB5iks6PvQOCcHhx1KfJ9tn86cjHd7+t854KldDKMzEXURrxjHDdT/yv6dq5FbmKFaOblWNwuHTQcL9C6Xxdv7NSaHdJQEFwUlWi8klpuqkqFSMi21sJ8R3LZcZwg8OfmM0o0z3OIN1Sq8E2ipPNmFjAyvpYq1PmcNPeIGsKCDfgb9FSYFdLfUmJzGFCNn2BQ6bcACdjXnZGQdsjTLu/5O76m8WxAtSck3z0tRAOryllkkNdPSo8Er3pRjaoIRO/DPTn0VkVi66LwGA8TrwQ2zLfqgdlT0uttzcdrHn5uJ0Qo7satVEKOcGpVZRQGlLGQipYG1q0xnzEDvdE7lt0VWmJBYkWehJ0do+rEFjdleWUndXp0tu8SLYquIT20ug3gDiGmZlCr2gkTs93MJ0u0+FKKBexD1x+buogpzyXllGsda0DV2wvLLsJEI7QadENx+M=
+env:
+  global:
+    secure: Pe9C2hTQZeV5/d03ay+H5KfxquuPT8B6HAkpmqTS7ZOo1/L31do2xCcjhMJVaT/fvIsDnzu7PBP0Aq02J4ov4Ri97Q/C9jrgvWkRIYnZSx0bm8pjg4/LQJYL3or/ymvgBsns2l3UCM6QAGlJEAvoXu2greCdcgNshoCVIr1eJ5OsJDlK0fCAdHvJpVcnUAwh0G85t0z4V8wTOFYLzwj+JRkty1r4Lfy/mMSxZUrHNqncxpHLqigytcctsquIfu1j06oq3O+os844vKiNNbeve9/hNdd5DJ4Orz6oRjfze7GG88TasOK3oAp3/pXZMq97tbvmMwQE+vwKj5M69RoAGCxMCOFyalgacZL2xcsIgozKG/jDQiAA1O++7qsD++ycFPxICw9EbLpiYlpcOzs4E3TZNUBnI9FXbGd9JSbfjLVB26VeDHd1mGcomsW7SgYEYWRwTMkWYmYHAU2vfBN5KMC3OvCrErmFUo2uR7+ofaAgfFje1PtGsRE7NhedK7GGm7RZne3oEQIpXSXqZQKqXVKvxxPrAm2cren2Lm3jXULn/9BPp9m7v5mJg9OKuRzEbZt+wgoCjxY9Bi29oR0xzMw1uv8yyaHiDROArdCvdpcq2VX5oEMB46uhZtrZttQwxcCuIkeJ+RGNpNN0vmwu9OFhn+YptKpZhG0gRzkWkDI=
