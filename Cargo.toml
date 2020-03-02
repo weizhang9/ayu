@@ -1,6 +1,6 @@
 [package]
 name = "ayu"
-version = "0.2.2"
+version = "0.3.0"
 authors = ["weizhang9 <wei.zhang@sky.uk>"]
 edition = "2018"
 license = "MIT"
@@ -11,10 +11,11 @@ repository = "https://github.com/weizhang9/ayu"
 keywords = ["cli", "random-password", "security", "utility"]
 categories = ["command-line-utilities"]
 travis-ci = { repository = "weizhang9/ayu", branch = "master" }
+maintenance = { status = "passively-maintained" }
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 rand = "0.7.3"
 clap = "2.33.0"
-failure = { version = "0.1.5", features = [] }
+# failure = { version = "0.1.5", features = [] }
