@@ -46,16 +46,6 @@ fn generate_with_option(len: &str, option: u8, allcaps: bool, noncaps: bool) -> 
     const LOWERCASE: &[u8] = b"abcdefghijklmnopqrstuvwxyz";
     const SPECIAL: &[u8] = b"()-.?[]_`~;:!@#$%^&*+=";
     const NUM: &[u8] = b"0123456789";
-    // const ALPHANUMSPEC: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ\
-    //                         abcdefghijklmnopqrstuvwxyz\
-    //                         0123456789!()-.?[]_`~;:!@#$%^&*+=";
-    // const ALPHANUM: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ\
-    //                     abcdefghijklmnopqrstuvwxyz\
-    //                     0123456789";
-    // const ALPHA: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ\
-    //                     abcdefghijklmnopqrstuvwxyz";
-    // const NUM: &[u8] = b"0123456789"; 
-
     let allchars: &[u8] = &[UPPERCASE, LOWERCASE, SPECIAL, NUM].concat();
     let allchars_caps: &[u8] = &[UPPERCASE, SPECIAL, NUM].concat();
     let allchars_noncaps: &[u8] = &[LOWERCASE, SPECIAL, NUM].concat();
